@@ -1,8 +1,8 @@
 ---
 workflow:
   name: Spatial Browser (spatialscape)
-  repository: REPLACE_WITH_GITHUB_OWNER/spatialscape-cirro
-  entrypoint: main.nf
+  repository: salk-airc/cirro-apps
+  entrypoint: pipelines/spatialscape/main.nf
   version: main
   executor: NEXTFLOW
   executor_version: null
@@ -93,7 +93,7 @@ Turns one or more 10x Xenium sections into an interactive spatialscape browser
 (https://github.com/MicTott/spatialscape, MIT): every section side by side, any gene in milliseconds,
 cluster colors, cell outlines, and split-by condition/age.
 
-Workflow repo: `spatialscape-cirro` (local checkout at /Users/andrew/cirro/spatialscape-cirro).
+Workflow: `pipelines/spatialscape/` in github.com/salk-airc/cirro-apps.
 Two processes: `TO_H5AD` per section (Xenium files → AnnData), then `BUILD_SITE`
 (`spatialscape build` + `site build` + `validate`). Container `python:3.12-slim`, spatialscape installed with pip at
 run time; bake an image before wide use.
