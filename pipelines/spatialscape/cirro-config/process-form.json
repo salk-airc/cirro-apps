@@ -1,0 +1,99 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Input",
+        "properties": {
+          "samplesheet": {
+            "type": "string",
+            "title": "Samplesheet",
+            "schema": "samplesheet",
+            "description": "One row per Xenium section. Pick each section's Xenium output folder (the folder holding cell_feature_matrix.h5 and cells.parquet)."
+          }
+        },
+        "required": [
+          "samplesheet"
+        ]
+      },
+      "browser": {
+        "type": "object",
+        "title": "Browser",
+        "properties": {
+          "dataset_name": {
+            "type": "string",
+            "title": "Dataset name",
+            "description": "Title shown at the top of the browser",
+            "default": "Spatial browser"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "One sentence describing the dataset"
+          },
+          "default_gene": {
+            "type": "string",
+            "title": "Default gene",
+            "description": "Gene to color by when the browser opens (e.g. Gfap). Leave empty to color by cluster."
+          }
+        }
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "spatialscape_version": {
+            "type": "string",
+            "title": "Spatialscape version",
+            "description": "spatialscape release to build with",
+            "default": "1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "structuredInputs": {
+    "samplesheet": {
+      "fileFormat": "CSV",
+      "schema": {
+        "title": "Samplesheet",
+        "description": "One row per Xenium section. Pick each section's Xenium output folder (the folder holding cell_feature_matrix.h5 and cells.parquet).",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sample": {
+              "type": "string",
+              "title": "Section name",
+              "description": "Label shown above the section in the browser",
+              "pattern": "^[A-Za-z0-9_.-]+$",
+              "errorMessage": "Letters, digits, dots, dashes and underscores only"
+            },
+            "xenium_dir": {
+              "type": "string",
+              "format": "directory-path",
+              "title": "Xenium output folder",
+              "description": "The Xenium Onboard Analysis output folder for this section"
+            },
+            "condition": {
+              "type": "string",
+              "title": "Condition",
+              "description": "Optional, e.g. genotype or treatment. The browser can split sections by it."
+            },
+            "age": {
+              "type": "string",
+              "title": "Age / timepoint",
+              "description": "Optional. The browser can split sections by it."
+            }
+          },
+          "required": [
+            "sample",
+            "xenium_dir"
+          ]
+        }
+      }
+    }
+  }
+}

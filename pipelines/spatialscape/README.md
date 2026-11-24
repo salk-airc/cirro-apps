@@ -1,0 +1,19 @@
+# spatialscape-cirro
+
+Nextflow pipeline that turns 10x Xenium output folders into a [spatialscape](https://github.com/MicTott/spatialscape)
+browser: a static website showing every section side by side, any gene in milliseconds.
+
+Built for Cirro (salk.cirro.bio), runs anywhere Nextflow runs.
+
+```bash
+nextflow run main.nf -profile docker \
+  --samplesheet samples.csv --outdir out \
+  --dataset_name "My Xenium run" --default_gene Gfap
+```
+
+`samples.csv` columns: `sample, xenium_dir, condition, age` (condition and age optional).
+Each `xenium_dir` needs `cell_feature_matrix.h5` and `cells.parquet`; `cell_boundaries.parquet` and `analysis/`
+are used when present. Morphology images are never read.
+
+Output: `out/site/` (open `index.html` from any static host that supports HTTP range requests, e.g. S3)
+and `out/dataset.yaml`.

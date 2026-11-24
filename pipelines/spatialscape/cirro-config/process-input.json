@@ -1,0 +1,8 @@
+{
+  "samplesheet": "$.structuredInputs.samplesheet.path",
+  "outdir": "$.dataset.dataPath",
+  "dataset_name": "$.dataset.params.browser.dataset_name",
+  "description": "$.dataset.params.browser.description",
+  "default_gene": "$.dataset.params.browser.default_gene",
+  "spatialscape_version": "$.dataset.params.advanced.spatialscape_version"
+}
