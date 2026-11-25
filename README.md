@@ -25,5 +25,13 @@ apps/<name>/           OAuth apps that sign in with Cirro
 Pipelines keep everything they need inside their own folder: containers and resources are set in
 `main.nf`, not a root `nextflow.config`, so many pipelines can share this repo.
 
-Cirro runs pipelines with **Nextflow 25.10.8**. Test with that version (`NXF_VER=25.10.8 nextflow run ...`):
-newer Nextflow accepts syntax 25.10 rejects (a function call right after a directive name, for one).
+Cirro runs pipelines with **Nextflow 25.10.8**. Test with that exact version. `NXF_VER=25.10.8` can be
+ignored by a newer local install, so check `nextflow -version`, or use the release itself:
+
+```bash
+curl -fL -o nextflow-25.10.8 https://github.com/nextflow-io/nextflow/releases/download/v25.10.8/nextflow-25.10.8-dist
+chmod +x nextflow-25.10.8 && ./nextflow-25.10.8 run pipelines/<name>/main.nf ...
+```
+
+25.10 treats a call to a script function inside a process directive (`label myFn(x) ? ...`) as an unknown
+directive; newer Nextflow accepts it. Inline the expression instead.
