@@ -1,0 +1,117 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Sequences",
+        "properties": {
+          "input": {
+            "type": "string",
+            "format": "file-path",
+            "multiple": true,
+            "title": "Protein FASTA file(s)",
+            "pattern": "\\.(fa|fasta|faa|fas|FA|FASTA|FAA|FAS)$",
+            "description": "Pick one or more protein FASTA files from this project. In monomer mode every sequence is predicted on its own; in complex mode each file is one complex."
+          }
+        },
+        "required": [
+          "input"
+        ]
+      },
+      "prediction": {
+        "type": "object",
+        "title": "Prediction",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "monomer",
+              "complex"
+            ],
+            "title": "Prediction type",
+            "description": "monomer: predict every sequence on its own. complex: each FASTA file is one complex, its sequences the chains.",
+            "default": "monomer",
+            "enumNames": [
+              "Monomers (each sequence alone)",
+              "Complex (each file is one complex)"
+            ]
+          },
+          "num_models": {
+            "type": "integer",
+            "enum": [
+              1,
+              5
+            ],
+            "title": "Models per prediction",
+            "description": "AlphaFold2 models per prediction. 1 is a quick check; 5 ranks five models.",
+            "default": 5,
+            "enumNames": [
+              "1 (quick check)",
+              "5 (ranked)"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "title": "Viewer title",
+            "description": "Title shown at the top of the results viewer",
+            "default": "Structure predictions"
+          }
+        }
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "num_recycles": {
+            "type": "integer",
+            "title": "Recycles",
+            "description": "Recycling iterations per model",
+            "default": 3
+          },
+          "msa_mode": {
+            "type": "string",
+            "enum": [
+              "mmseqs2_uniref_env",
+              "mmseqs2_uniref",
+              "single_sequence"
+            ],
+            "title": "MSA search",
+            "description": "MSA search. single_sequence sends nothing to the MSA server but gives much weaker predictions.",
+            "default": "mmseqs2_uniref_env"
+          },
+          "pair_mode": {
+            "type": "string",
+            "enum": [
+              "unpaired_paired",
+              "paired",
+              "unpaired"
+            ],
+            "title": "MSA pairing (complexes)",
+            "description": "How MSAs of different chains are paired for complexes",
+            "default": "unpaired_paired"
+          },
+          "max_residues": {
+            "type": "integer",
+            "title": "Maximum residues per prediction",
+            "description": "Largest prediction allowed (total residues). Larger ones need more GPU memory.",
+            "default": 2500
+          },
+          "colabfold_version": {
+            "type": "string",
+            "title": "ColabFold version",
+            "description": "ColabFold release installed at run time",
+            "default": "1.6.2"
+          },
+          "jax_version": {
+            "type": "string",
+            "title": "JAX version",
+            "description": "JAX release installed with ColabFold",
+            "default": "0.10.2"
+          }
+        }
+      }
+    }
+  }
+}

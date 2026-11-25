@@ -1,0 +1,13 @@
+{
+  "input": "$.dataset.params.input.input[*]",
+  "outdir": "$.dataset.dataPath",
+  "mode": "$.dataset.params.prediction.mode",
+  "num_models": "$.dataset.params.prediction.num_models",
+  "title": "$.dataset.params.prediction.title",
+  "num_recycles": "$.dataset.params.advanced.num_recycles",
+  "msa_mode": "$.dataset.params.advanced.msa_mode",
+  "pair_mode": "$.dataset.params.advanced.pair_mode",
+  "max_residues": "$.dataset.params.advanced.max_residues",
+  "colabfold_version": "$.dataset.params.advanced.colabfold_version",
+  "jax_version": "$.dataset.params.advanced.jax_version"
+}

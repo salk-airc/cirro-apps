@@ -6,6 +6,7 @@ that let Salk researchers explore and analyze their own data.
 | Path | What | Kind |
 |---|---|---|
 | [`pipelines/spatialscape`](pipelines/spatialscape) | 10x Xenium sections → interactive [spatialscape](https://github.com/MicTott/spatialscape) browser | Nextflow pipeline |
+| [`pipelines/colabfold`](pipelines/colabfold) | Protein FASTA → AlphaFold2 structures (ColabFold) with an interactive pLDDT/PAE viewer | Nextflow pipeline (GPU) |
 
 ## Layout
 

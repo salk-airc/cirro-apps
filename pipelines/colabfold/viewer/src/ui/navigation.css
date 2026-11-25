@@ -1,0 +1,27 @@
+/* Adapted Rare UI navigation. The selected step separates from a shared track. */
+.rare-nav { max-width: 100%; min-width: 0; overflow-x: auto; padding: 3px; }
+.rare-nav-track { display: flex; align-items: stretch; width: max-content; }
+.rare-nav-segment { position: relative; background: var(--panel-2); flex: none; }
+.rare-nav-segment[data-active='true'] { background: var(--accent); }
+.rare-nav-neck { position: absolute; right: 100%; top: 0; height: 100%; pointer-events: none; }
+.rare-nav .rare-button {
+  min-height: 44px;
+  padding: 0.55rem 0.75rem;
+  background: transparent;
+  color: var(--ink-2);
+  border: 0;
+  border-radius: inherit;
+  box-shadow: none;
+  transform: none;
+}
+.rare-nav .rare-button:hover { background: transparent; color: var(--ink); }
+.rare-nav .rare-button[aria-selected='true'],
+.rare-nav .rare-button[aria-current='page'] { color: var(--accent-ink); }
+.rare-nav .rare-button:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+
+@media (max-width: 44rem) {
+  .rare-nav .rare-button { padding-inline: 0.45rem; }
+}
+@media (forced-colors: active) {
+  .rare-nav .rare-button[aria-selected='true'], .rare-nav .rare-button[aria-current='page'] { outline: 2px solid Highlight; outline-offset: -2px; }
+}
