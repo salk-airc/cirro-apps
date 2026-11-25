@@ -1,0 +1,26 @@
+{
+  "name": "cellprofiler-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static viewer for CellProfiler results, opened in Cirro with Visualize > Web Viewer.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "5.3.0",
+    "lucide-react": "1.55.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.2"
+  }
+}
