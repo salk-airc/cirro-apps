@@ -24,3 +24,6 @@ apps/<name>/           OAuth apps that sign in with Cirro
 
 Pipelines keep everything they need inside their own folder: containers and resources are set in
 `main.nf`, not a root `nextflow.config`, so many pipelines can share this repo.
+
+Cirro runs pipelines with **Nextflow 25.10.8**. Test with that version (`NXF_VER=25.10.8 nextflow run ...`):
+newer Nextflow accepts syntax 25.10 rejects (a function call right after a directive name, for one).

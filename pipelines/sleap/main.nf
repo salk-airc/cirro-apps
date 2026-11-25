@@ -36,7 +36,7 @@ def isVideo(String name) {
 
 process PREDICT {
     tag "${name}"
-    label flag(params.gpu) ? 'process_gpu' : 'process_cpu'
+    label(flag(params.gpu) ? 'process_gpu' : 'process_cpu')
     container 'python:3.12-bookworm'
     cpus 8
     memory '30 GB'
