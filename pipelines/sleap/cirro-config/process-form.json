@@ -1,0 +1,96 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Videos",
+        "properties": {
+          "videos": {
+            "type": "string",
+            "title": "Video file(s)",
+            "format": "file-path",
+            "pattern": "\\.(mp4|avi|mov|mkv|mpg|mpeg|m4v|wmv|webm|MP4|AVI|MOV|MKV)$",
+            "description": "Video file(s) to track (.mp4, .avi, .mov, ...). Each is predicted on its own and gets its own page in the viewer.",
+            "multiple": true
+          }
+        },
+        "required": [
+          "videos"
+        ]
+      },
+      "model": {
+        "type": "object",
+        "title": "Model and tracking",
+        "properties": {
+          "models": {
+            "type": "string",
+            "title": "Trained model folder(s)",
+            "format": "directory-path",
+            "description": "Trained SLEAP model folder(s), each holding best.ckpt and training_config.yaml. One folder for single-instance or bottom-up models; two (centroid and centered instance) for top-down.",
+            "multiple": true
+          },
+          "tracking": {
+            "type": "boolean",
+            "title": "Track identities across frames",
+            "description": "Link poses across frames into tracks (identities). Off for single-animal videos.",
+            "default": true
+          },
+          "max_instances": {
+            "type": "integer",
+            "title": "Animals per frame (0 = no limit)",
+            "description": "Most animals per frame; 0 means no limit. Set it to the number of animals in the arena for cleaner tracks.",
+            "default": 0
+          },
+          "title": {
+            "type": "string",
+            "title": "Viewer title",
+            "description": "Title shown at the top of the viewer",
+            "default": "SLEAP pose tracking"
+          }
+        },
+        "required": [
+          "models"
+        ]
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "gpu": {
+            "type": "boolean",
+            "title": "Use a GPU",
+            "description": "Run inference on a GPU (needs the project's GPU limit above 0). Off runs on CPU, much slower for long videos.",
+            "default": true
+          },
+          "tracker": {
+            "type": "string",
+            "enum": [
+              "classic",
+              "sort",
+              "bytetrack",
+              "botsort",
+              "ocsort"
+            ],
+            "title": "Tracker",
+            "description": "Tracking algorithm (sleap-nn --tracker)",
+            "default": "classic"
+          },
+          "batch_size": {
+            "type": "integer",
+            "title": "Frames per batch",
+            "description": "Frames per inference batch",
+            "default": 4
+          },
+          "sleap_nn_version": {
+            "type": "string",
+            "title": "sleap-nn version",
+            "description": "sleap-nn release installed at run time",
+            "default": "0.3.5"
+          }
+        }
+      }
+    }
+  }
+}
