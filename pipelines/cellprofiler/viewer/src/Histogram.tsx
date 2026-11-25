@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import { formatNumber } from './format';
 import type { ColumnStats } from './types';
 
-const HEIGHT = 240;
-const PAD = { top: 12, right: 12, bottom: 34, left: 52 };
+const HEIGHT = 300;
+const PAD = { top: 16, right: 12, bottom: 34, left: 52 };
 
 function niceTicks(max: number, count = 4): number[] {
   if (max <= 0) return [0];
   const raw = max / count;
   const magnitude = 10 ** Math.floor(Math.log10(raw));
   const step = [1, 2, 2.5, 5, 10].map((m) => m * magnitude).find((s) => s >= raw) ?? raw;
-  const ticks = [];
-  for (let value = 0; value <= max + 1e-9; value += step) ticks.push(value);
+  const ticks = [0];
+  while (ticks[ticks.length - 1]! < max - 1e-9) ticks.push(ticks.length * step);
   return ticks;
 }
 
@@ -63,6 +63,11 @@ export function Histogram({ column, unit }: { column: ColumnStats; unit: string 
 
   return (
     <div className="histogram" ref={wrap}>
+      <p className="hist-readout" aria-live="polite">
+        {hovered
+          ? <><strong>{hovered.count.toLocaleString()} {unit}</strong> between {formatNumber(hovered.from)} and {formatNumber(hovered.to)}</>
+          : <span className="muted">Point at a bar to see its count</span>}
+      </p>
       <svg width={width} height={HEIGHT} role="img"
         aria-label={`Histogram of ${column.name}: ${column.n} ${unit}, from ${formatNumber(column.min)} to ${formatNumber(column.max)}`}
         onPointerLeave={() => setHover(undefined)}>
@@ -85,13 +90,6 @@ export function Histogram({ column, unit }: { column: ColumnStats; unit: string 
             onPointerEnter={() => setHover(i)} />
         ))}
       </svg>
-      {hovered && (
-        <div className="hist-tip" role="status"
-          style={{ left: Math.min(width - 170, Math.max(0, PAD.left + (hover! + 0.5) * slot - 85)) }}>
-          <strong>{hovered.count.toLocaleString()} {unit}</strong>
-          <span>{formatNumber(hovered.from)} to {formatNumber(hovered.to)}</span>
-        </div>
-      )}
     </div>
   );
 }

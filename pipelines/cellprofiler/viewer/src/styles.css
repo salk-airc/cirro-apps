@@ -35,7 +35,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .icon-button svg { width: 17px; height: 17px; }
 
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; margin: 0; background: var(--border); border-bottom: 1px solid var(--border); }
-.tiles div { background: var(--background); padding: 16px 0 14px; }
+.tiles div { background: var(--background); padding: 16px 18px 14px; }
+.tiles div:first-child { padding-left: 0; }
 .tiles dt { color: var(--muted-foreground); font-size: 0.8rem; }
 .tiles dd { margin: 2px 0 0; font-size: 1.5rem; font-weight: 650; font-variant-numeric: tabular-nums; }
 
@@ -71,27 +72,27 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .filters label { display: grid; gap: 4px; font-size: 0.8rem; color: var(--muted-foreground); }
 .filters .grow { flex: 1 1 260px; }
 .filters select, .filters input { min-height: 38px; padding: 0 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); color: var(--foreground); font: inherit; font-size: 0.9rem; }
-.measure-grid { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.measure-grid { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 20px; align-items: start; }
 .column-list { list-style: none; margin: 0; padding: 4px; max-height: 520px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
 .column-list button { width: 100%; padding: 6px 8px; border: 0; border-radius: calc(var(--radius) - 4px); background: none; text-align: left; font-size: 0.82rem; cursor: pointer; overflow-wrap: anywhere; }
 .column-list button:hover { background: var(--secondary); }
 .column-list button[aria-pressed='true'] { background: color-mix(in srgb, var(--primary) 14%, transparent); color: var(--foreground); font-weight: 600; }
 .column-list li.muted { padding: 8px; font-size: 0.82rem; }
-.chart-card { padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); min-width: 0; }
+.chart-card { padding: 20px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); min-width: 0; }
 .chart-card > p { margin: 2px 0 0; }
-.mini-stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 14px 0 6px; }
+.mini-stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 16px 0 10px; }
 .mini-stats dt { color: var(--muted-foreground); font-size: 0.75rem; }
 .mini-stats dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
 
 .histogram { position: relative; width: 100%; }
-.histogram svg { display: block; overflow: visible; }
+.histogram svg { display: block; }
 .hist-bar { fill: var(--bar); }
 .hist-bar[data-hover] { fill: color-mix(in srgb, var(--bar), var(--foreground) 25%); }
 .hist-grid { stroke: var(--grid); stroke-width: 1; }
 .hist-axis { stroke: var(--line-strong); stroke-width: 1; }
 .hist-tick { fill: var(--muted-foreground); font-size: 11px; font-variant-numeric: tabular-nums; }
 .hist-hit { fill: transparent; cursor: crosshair; }
-.hist-tip { position: absolute; top: 4px; width: 170px; padding: 6px 10px; display: grid; gap: 1px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--popover); color: var(--popover-foreground); font-size: 0.78rem; font-variant-numeric: tabular-nums; pointer-events: none; box-shadow: 0 4px 14px rgb(0 0 0 / 0.12); }
+.hist-readout { min-height: 22px; margin: 0 0 6px; font-size: 0.82rem; font-variant-numeric: tabular-nums; text-align: right; }
 
 .downloads h2 { margin: 18px 0 8px; }
 .downloads ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
