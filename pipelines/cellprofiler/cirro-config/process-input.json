@@ -1,0 +1,8 @@
+{
+  "images": "$.dataset.params.input.images[*]",
+  "outdir": "$.dataset.dataPath",
+  "pipeline": "$.dataset.params.analysis.pipeline",
+  "title": "$.dataset.params.analysis.title",
+  "chunk_size": "$.dataset.params.advanced.chunk_size",
+  "cellprofiler_container": "$.dataset.params.advanced.cellprofiler_container"
+}
