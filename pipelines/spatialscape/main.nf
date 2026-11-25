@@ -25,7 +25,7 @@ def optionalFile(String dir, String rel) {
 
 process TO_H5AD {
     tag "${sample}"
-    container 'python:3.12-slim'
+    container 'python:3.12-bookworm'   // full image: Nextflow needs ps (procps) inside the container on AWS Batch
     cpus 2
     memory '8 GB'
 
@@ -52,7 +52,7 @@ process TO_H5AD {
 }
 
 process BUILD_SITE {
-    container 'python:3.12-slim'
+    container 'python:3.12-bookworm'   // full image: Nextflow needs ps (procps) inside the container on AWS Batch
     cpus 4
     memory '16 GB'
     publishDir params.outdir, mode: 'copy'

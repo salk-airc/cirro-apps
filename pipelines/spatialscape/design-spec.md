@@ -95,7 +95,7 @@ cluster colors, cell outlines, and split-by condition/age.
 
 Workflow: `pipelines/spatialscape/` in github.com/salk-airc/cirro-apps.
 Two processes: `TO_H5AD` per section (Xenium files → AnnData), then `BUILD_SITE`
-(`spatialscape build` + `site build` + `validate`). Container `python:3.12-slim`, spatialscape installed with pip at
+(`spatialscape build` + `site build` + `validate`). Container `python:3.12-bookworm` (not -slim: Nextflow on AWS Batch needs `ps`), spatialscape installed with pip at
 run time; bake an image before wide use.
 
 Tested locally 2026-11-24 (Nextflow 26.10.7, Docker) on 4 public 10x Xenium TgCRND8/wildtype mouse brain sections:
