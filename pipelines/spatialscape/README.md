@@ -12,6 +12,9 @@ nextflow run main.nf -profile docker \
   --dataset_name "Alzheimer's mouse brain (Xenium)" --default_gene Gfap
 ```
 
+**Viewing in Cirro:** open the output dataset → **Visualize → Web Viewer**. Cirro serves `site/index.html` as a
+dataset app (range requests supported), so the browser runs inside Cirro with each viewer's own access. Verified 2026-11-24.
+
 In Cirro: pipeline "Spatial Browser (spatialscape)", entrypoint `pipelines/spatialscape/main.nf`,
 config in `cirro-config/` (generated from `design-spec.md`).
 
