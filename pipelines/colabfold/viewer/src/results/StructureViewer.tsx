@@ -162,6 +162,14 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
     active.render();
   };
 
+  const spinView = (degreesY: number, degreesX: number) => {
+    const active = viewer.current;
+    if (!active || loading || error) return;
+    if (degreesY) active.rotate(degreesY, 'y');
+    if (degreesX) active.rotate(degreesX, 'x');
+    active.render();
+  };
+
   return (
     <section className="structure-panel" aria-labelledby="structure-heading">
       <div className="panel-heading">
@@ -182,6 +190,7 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
           </button>
         </div>
       </div>
+      <div className="structure-stage" data-backdrop={backdrop}>
       <div
         ref={container}
         data-backdrop={backdrop}
@@ -195,8 +204,9 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
           if (action) { event.preventDefault(); changeView(action); }
         }}
       />
-      <StructureControls disabled={loading || Boolean(error)} onAction={changeView} />
-      <p id="structure-keyboard-help" className="viewer-keyboard-help">Arrow keys rotate. + and − zoom. Home resets the view.</p>
+      <StructureControls disabled={loading || Boolean(error)} onAction={changeView} onSpin={spinView} />
+      </div>
+      <p id="structure-keyboard-help" className="viewer-keyboard-help">Drag the structure or the joystick to rotate; tap the joystick to reset. Arrow keys rotate, + and − zoom, Home resets.</p>
       <div className="plddt-legend" aria-label="pLDDT color key">
         <span><i className="very-high" />90–100</span>
         <span><i className="high" />70–89</span>

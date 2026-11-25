@@ -307,8 +307,6 @@ legend { color: var(--muted); font-size: 0.84rem; margin-bottom: 8px; }
 .member-row strong { overflow-wrap: anywhere; }
 .member-row span { color: var(--muted); font-size: 0.78rem; }
 .member-row.pending strong { font-weight: 500; }
-.structure-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.structure-controls button { min-width: 44px; min-height: 44px; }
 .viewer-keyboard-help { font-size: 0.8rem; color: var(--muted); }
 .auth-message, .field-error, .message, .pae-readout { border-radius: var(--r-control); }
 .loading-title, .loading-row { border-radius: var(--r-control); }
@@ -387,3 +385,28 @@ legend { color: var(--muted); font-size: 0.84rem; margin-bottom: 8px; }
 .structure-canvas[data-backdrop='dark'] { background: #1b1f27; }
 .icon-button { width: 44px; min-width: 44px; padding: 0; display: inline-grid; place-items: center; }
 .icon-button svg { width: 18px; height: 18px; }
+
+/* Corner joystick over the structure (StructureControls.tsx). Colors follow the
+   structure backdrop, not the page theme, so the controls always read against it. */
+.structure-stage { position: relative; }
+.structure-stage { --stick-bg: rgb(255 255 255 / 0.82); --stick-line: rgb(27 31 39 / 0.14); --stick-ink: #3d4450; --stick-knob: #c9ced8; --stick-shadow: 0 2px 6px rgb(27 31 39 / 0.22); }
+.structure-stage[data-backdrop='dark'] { --stick-bg: rgb(43 48 58 / 0.82); --stick-line: rgb(255 255 255 / 0.12); --stick-ink: #d7dbe2; --stick-knob: #4a5160; --stick-shadow: 0 2px 8px rgb(0 0 0 / 0.45); }
+.structure-controls { position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; user-select: none; -webkit-user-select: none; }
+.joystick { position: relative; width: 108px; height: 108px; border-radius: 50%; background: var(--stick-bg); border: 1px solid var(--stick-line); box-shadow: var(--stick-shadow), inset 0 1px 3px rgb(0 0 0 / 0.06); backdrop-filter: blur(6px); }
+.joystick-arrow { position: absolute; width: 34px; height: 34px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--stick-ink); cursor: pointer; }
+.joystick-arrow:hover:not(:disabled) { background: color-mix(in srgb, var(--stick-ink) 12%, transparent); }
+.joystick-arrow svg { width: 18px; height: 18px; }
+.joystick-up { top: 2px; left: 50%; transform: translateX(-50%); }
+.joystick-down { bottom: 2px; left: 50%; transform: translateX(-50%); }
+.joystick-left { left: 2px; top: 50%; transform: translateY(-50%); }
+.joystick-right { right: 2px; top: 50%; transform: translateY(-50%); }
+.joystick-knob { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--stick-line); background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--stick-knob), white 55%), var(--stick-knob) 75%); box-shadow: var(--stick-shadow); cursor: grab; touch-action: none; transition: transform 160ms cubic-bezier(.2,.9,.3,1.3); }
+.joystick[data-active] .joystick-knob { cursor: grabbing; transition: none; }
+.joystick-knob:disabled, .joystick-arrow:disabled, .zoom-pill button:disabled { cursor: not-allowed; opacity: 0.45; }
+.zoom-pill { display: grid; border-radius: 999px; overflow: hidden; background: var(--stick-bg); border: 1px solid var(--stick-line); box-shadow: var(--stick-shadow); backdrop-filter: blur(6px); }
+.zoom-pill button { width: 36px; height: 40px; padding: 0; display: grid; place-items: center; border: 0; background: transparent; color: var(--stick-ink); cursor: pointer; }
+.zoom-pill button + button { border-top: 1px solid var(--stick-line); }
+.zoom-pill button:hover:not(:disabled) { background: color-mix(in srgb, var(--stick-ink) 12%, transparent); }
+.zoom-pill svg { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: reduce) { .joystick-knob { transition: none; } }
+.joystick-knob, .joystick-arrow, .zoom-pill button { min-height: 0; min-width: 0; box-sizing: border-box; }
