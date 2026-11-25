@@ -1,0 +1,64 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Images",
+        "properties": {
+          "images": {
+            "type": "string",
+            "title": "Image folder(s)",
+            "format": "directory-path",
+            "description": "Folder(s) of microscope images. Every image file inside (any depth) is offered to the pipeline; its own Images and NamesAndTypes rules decide what is used.",
+            "multiple": true
+          }
+        },
+        "required": [
+          "images"
+        ]
+      },
+      "analysis": {
+        "type": "object",
+        "title": "Analysis",
+        "properties": {
+          "pipeline": {
+            "type": "string",
+            "title": "CellProfiler pipeline (.cppipe)",
+            "format": "file-path",
+            "pattern": "\\.cppipe$",
+            "description": "Your CellProfiler pipeline (.cppipe, from File > Export > Pipeline). It must use Images/NamesAndTypes (not LoadData) and have an ExportToSpreadsheet module."
+          },
+          "title": {
+            "type": "string",
+            "title": "Viewer title",
+            "description": "Title shown at the top of the results viewer",
+            "default": "CellProfiler results"
+          }
+        },
+        "required": [
+          "pipeline"
+        ]
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "chunk_size": {
+            "type": "integer",
+            "title": "Image sets per task",
+            "description": "Image sets per parallel task. Pipelines with Groups enabled run one task per group instead.",
+            "default": 50
+          },
+          "cellprofiler_container": {
+            "type": "string",
+            "title": "CellProfiler container",
+            "description": "CellProfiler container image",
+            "default": "quay.io/biocontainers/cellprofiler:4.2.8.1--pyhdfd78af_0"
+          }
+        }
+      }
+    }
+  }
+}
