@@ -34,9 +34,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .icon-button:hover { border-color: var(--primary); }
 .icon-button svg { width: 17px; height: 17px; }
 
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; margin: 0; background: var(--border); border-bottom: 1px solid var(--border); }
-.tiles div { background: var(--background); padding: 16px 18px 14px; }
-.tiles div:first-child { padding-left: 0; }
+.tiles { display: flex; flex-wrap: wrap; margin: 0; border-bottom: 1px solid var(--border); }
+.tiles div { flex: 1 1 140px; padding: 16px 18px 14px; box-shadow: inset 1px 0 var(--border); }
+.tiles div:first-child { padding-left: 0; box-shadow: none; }
 .tiles dt { color: var(--muted-foreground); font-size: 0.8rem; }
 .tiles dd { margin: 2px 0 0; font-size: 1.5rem; font-weight: 650; font-variant-numeric: tabular-nums; }
 
