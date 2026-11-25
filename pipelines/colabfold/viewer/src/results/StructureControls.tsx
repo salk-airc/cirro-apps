@@ -19,7 +19,7 @@ export function viewActionForKey(key: string): ViewAction | undefined {
   }
 }
 
-const TRAVEL = 26;        // px the knob can move from center
+const TRAVEL = 18;        // px the knob can move from center
 const MAX_SPEED = 180;    // degrees per second at full deflection
 const TAP_SLOP = 4;       // px of movement still counted as a tap
 
