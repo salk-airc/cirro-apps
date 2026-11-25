@@ -3,3 +3,4 @@ work/
 .nextflow.log*
 test-out/
 pipelines/*/test/data/
+node_modules/

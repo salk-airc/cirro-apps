@@ -1,0 +1,12 @@
+{
+  "videos": "$.dataset.params.input.videos[*]",
+  "outdir": "$.dataset.dataPath",
+  "models": "$.dataset.params.model.models[*]",
+  "tracking": "$.dataset.params.model.tracking",
+  "max_instances": "$.dataset.params.model.max_instances",
+  "title": "$.dataset.params.model.title",
+  "gpu": "$.dataset.params.advanced.gpu",
+  "tracker": "$.dataset.params.advanced.tracker",
+  "batch_size": "$.dataset.params.advanced.batch_size",
+  "sleap_nn_version": "$.dataset.params.advanced.sleap_nn_version"
+}
