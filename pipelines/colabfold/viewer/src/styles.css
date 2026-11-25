@@ -385,3 +385,5 @@ legend { color: var(--muted); font-size: 0.84rem; margin-bottom: 8px; }
 .panel-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .structure-canvas[data-backdrop='white'] { background: #ffffff; }
 .structure-canvas[data-backdrop='dark'] { background: #1b1f27; }
+.icon-button { width: 44px; min-width: 44px; padding: 0; display: inline-grid; place-items: center; }
+.icon-button svg { width: 18px; height: 18px; }

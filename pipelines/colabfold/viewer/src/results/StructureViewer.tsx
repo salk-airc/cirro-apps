@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { ImageDownIcon, MoonIcon, SunIcon } from 'lucide-react';
 import type { AtomSpec, GLViewer } from '3dmol';
 import { getStructure } from '../api';
 import { StructureControls, viewActionForKey, type ViewAction } from './StructureControls';
@@ -169,13 +170,15 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
           <p>Blue is higher pLDDT; orange is lower.</p>
         </div>
         <div className="panel-actions">
-          <button className="quiet-button" type="button" aria-pressed={backdrop === 'dark'}
+          <button className="quiet-button icon-button" type="button"
             onClick={() => setBackdrop(backdrop === 'white' ? 'dark' : 'white')}
-            title="Switch the structure background between white and dark">
-            {backdrop === 'white' ? 'Dark background' : 'White background'}
+            aria-label={`Background: ${backdrop === 'white' ? 'white' : 'dark'}. Switch to ${backdrop === 'white' ? 'dark' : 'white'}.`}
+            title={backdrop === 'white' ? 'White background. Click for dark.' : 'Dark background. Click for white.'}>
+            {backdrop === 'white' ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />}
           </button>
-          <button className="quiet-button" type="button" disabled={loading || Boolean(error)} onClick={saveImage}>
-            Save PNG
+          <button className="quiet-button icon-button" type="button" disabled={loading || Boolean(error)} onClick={saveImage}
+            aria-label="Save structure as PNG" title="Save PNG">
+            <ImageDownIcon aria-hidden="true" />
           </button>
         </div>
       </div>

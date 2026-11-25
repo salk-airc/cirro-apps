@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ImageDownIcon } from 'lucide-react';
 import { getPae } from '../api';
 import type { PaePoint } from './paeSelection';
 
@@ -156,7 +157,10 @@ export function PaePlot({ jobId, rank, selection, onSelect }: {
           <h2 id="pae-heading">Predicted aligned error</h2>
           <p>Uncertainty in the relative placement of two residues. Lower values mean greater confidence.</p>
         </div>
-        <button className="quiet-button" type="button" disabled={!data} onClick={saveImage}>Save PNG</button>
+        <button className="quiet-button icon-button" type="button" disabled={!data} onClick={saveImage}
+          aria-label="Save PAE matrix as PNG" title="Save PNG">
+          <ImageDownIcon aria-hidden="true" />
+        </button>
       </div>
       <div className="pae-wrap">
         <canvas
