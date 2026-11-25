@@ -23,6 +23,19 @@ function backgroundColor(element: HTMLElement): string {
   return `#${((red! << 16) | (green! << 8) | blue!).toString(16).padStart(6, '0')}`;
 }
 
+// The pLDDT colors (AlphaFold DB palette) are made for a white background; dark blue ribbons
+// fade into a dark one. Let people pick, and remember the choice.
+type Backdrop = 'white' | 'dark';
+const BACKDROP_KEY = 'fold-structure-backdrop';
+
+function savedBackdrop(): Backdrop {
+  try {
+    return localStorage.getItem(BACKDROP_KEY) === 'dark' ? 'dark' : 'white';
+  } catch {
+    return 'white';
+  }
+}
+
 export function StructureViewer({ jobId, rank, residueCount, selection }: {
   jobId: string; rank: number; residueCount: number; selection?: PaePoint;
 }) {
@@ -31,6 +44,7 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(true);
   const [residues, setResidues] = useState<AtomSpec[]>([]);
+  const [backdrop, setBackdrop] = useState<Backdrop>(savedBackdrop);
   const markers = useMemo(() => paeResidueMarkers(residues, selection, residueCount), [residues, selection, residueCount]);
 
   useEffect(() => {
@@ -48,6 +62,12 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
     });
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    try { localStorage.setItem(BACKDROP_KEY, backdrop); } catch { /* storage blocked */ }
+    const element = container.current;
+    if (element) viewer.current?.setBackgroundColor(backgroundColor(element), 1).render();
+  }, [backdrop]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -148,12 +168,20 @@ export function StructureViewer({ jobId, rank, residueCount, selection }: {
           <h2 id="structure-heading">Structure</h2>
           <p>Blue is higher pLDDT; orange is lower.</p>
         </div>
-        <button className="quiet-button" type="button" disabled={loading || Boolean(error)} onClick={saveImage}>
-          Save PNG
-        </button>
+        <div className="panel-actions">
+          <button className="quiet-button" type="button" aria-pressed={backdrop === 'dark'}
+            onClick={() => setBackdrop(backdrop === 'white' ? 'dark' : 'white')}
+            title="Switch the structure background between white and dark">
+            {backdrop === 'white' ? 'Dark background' : 'White background'}
+          </button>
+          <button className="quiet-button" type="button" disabled={loading || Boolean(error)} onClick={saveImage}>
+            Save PNG
+          </button>
+        </div>
       </div>
       <div
         ref={container}
+        data-backdrop={backdrop}
         className="structure-canvas"
         role="group"
         tabIndex={loading || error ? -1 : 0}

@@ -380,3 +380,8 @@ legend { color: var(--muted); font-size: 0.84rem; margin-bottom: 8px; }
 
   button:active:not(:disabled), a.quiet-button:active { transform: none; }
 }
+
+/* Viewer additions (cirro-apps): structure background toggle. */
+.panel-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.structure-canvas[data-backdrop='white'] { background: #ffffff; }
+.structure-canvas[data-backdrop='dark'] { background: #1b1f27; }
