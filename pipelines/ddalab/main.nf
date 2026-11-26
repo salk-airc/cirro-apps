@@ -130,10 +130,13 @@ workflow {
     if (twice) error "Two recordings share the name ${twice.join(', ')}. Names must be unique across the picked files."
 
     // BrainVision (.vhdr with .eeg and .vmrk) and EEGLAB (.set with .fdt) keep their data beside
-    // the header: stage every file in the same folder that shares the recording's name.
+    // the header: stage those files from the same folder. Named, not globbed: a glob over S3
+    // matched nothing on Cirro, so the .eeg never reached the task.
+    def sidecars = [vhdr: ['eeg', 'vmrk'], set: ['fdt']]
     def recordings = Channel.fromList(picked).map { f ->
-        def siblings = file("${f.parent}/${stem(f.name)}.*", type: 'file')
-        tuple(f.name, ((siblings instanceof List ? siblings : [siblings]) + [f]).unique { it.name })
+        def ext = f.extension.toLowerCase()
+        def extra = (sidecars[ext] ?: []).collect { file("${f.parent}/${stem(f.name)}.${it}") }.findAll { it.exists() }
+        tuple(f.name, [f] + extra)
     }
 
     DDA(recordings)
