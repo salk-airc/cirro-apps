@@ -1,0 +1,160 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Recordings",
+        "properties": {
+          "recordings": {
+            "type": "string",
+            "title": "Recording file(s)",
+            "format": "file-path",
+            "multiple": true,
+            "pattern": "\\.(edf|bdf|vhdr|set|fif|nwb|csv|tsv|txt|ascii|dat|EDF|BDF|VHDR|SET|FIF|NWB|CSV|TSV|TXT)$",
+            "description": "EDF, BDF, BrainVision (.vhdr, with its .eeg and .vmrk beside it), EEGLAB (.set), FIF, NWB, or a text table (.csv, .tsv, .txt). Each is analyzed on its own and gets its own page in the viewer."
+          }
+        },
+        "required": [
+          "recordings"
+        ]
+      },
+      "variants": {
+        "type": "object",
+        "title": "Variants",
+        "properties": {
+          "st": {
+            "type": "boolean",
+            "title": "Single timeseries (ST)",
+            "description": "One row per channel",
+            "default": true
+          },
+          "ct": {
+            "type": "boolean",
+            "title": "Cross timeseries (CT)",
+            "description": "One row per channel pair in CT pairs",
+            "default": false
+          },
+          "ct_pairs": {
+            "type": "string",
+            "title": "CT pairs",
+            "description": "0-based channel index pairs, such as \"0,1 0,2\". Required when CT is on.",
+            "default": ""
+          },
+          "cd": {
+            "type": "boolean",
+            "title": "Cross dynamical (CD)",
+            "description": "Directed, one row per pair in CD pairs",
+            "default": false
+          },
+          "cd_pairs": {
+            "type": "string",
+            "title": "CD pairs",
+            "description": "Directed channel index pairs, such as \"0,1 1,0\". Required when CD is on.",
+            "default": ""
+          },
+          "de": {
+            "type": "boolean",
+            "title": "Dynamical ergodicity (DE)",
+            "description": "Over the selected channels",
+            "default": false
+          },
+          "sy": {
+            "type": "boolean",
+            "title": "Synchronization (SY)",
+            "description": "Over the selected channels",
+            "default": false
+          }
+        }
+      },
+      "windows": {
+        "type": "object",
+        "title": "Windows and channels",
+        "properties": {
+          "wl": {
+            "type": "integer",
+            "title": "Window length (samples)",
+            "description": "Samples per window",
+            "default": 200
+          },
+          "ws": {
+            "type": "integer",
+            "title": "Window step (samples)",
+            "description": "Samples between window starts",
+            "default": 100
+          },
+          "delays": {
+            "type": "string",
+            "title": "Delays (samples)",
+            "description": "Delays (tau) in samples, separated by spaces",
+            "default": "7 10"
+          },
+          "channels": {
+            "type": "string",
+            "title": "Channels (0-based, empty = all)",
+            "description": "Channel indices to analyze, separated by spaces. Empty analyzes every channel.",
+            "default": ""
+          },
+          "reference": {
+            "type": "string",
+            "title": "Re-reference",
+            "description": "Re-reference before DDA. The derived channels replace the originals, so channel indices count them.",
+            "default": "none",
+            "enum": [
+              "none",
+              "average",
+              "bipolar"
+            ],
+            "enumNames": [
+              "None",
+              "Common average",
+              "Bipolar (neighbors)"
+            ]
+          },
+          "start": {
+            "type": "number",
+            "title": "Start (s)",
+            "description": "Start time in seconds",
+            "default": 0
+          },
+          "end": {
+            "type": "number",
+            "title": "End (s, 0 = to the end)",
+            "description": "End time in seconds; 0 analyzes to the end",
+            "default": 0
+          },
+          "title": {
+            "type": "string",
+            "title": "Viewer title",
+            "description": "Title shown at the top of the viewer",
+            "default": "DDA results"
+          }
+        },
+        "required": [
+          "wl",
+          "ws",
+          "delays"
+        ]
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "sr": {
+            "type": "number",
+            "title": "Sampling rate (Hz, text tables only)",
+            "description": "Sampling rate for .csv/.tsv/.txt input; 0 reads it from the file",
+            "default": 0
+          },
+          "ddalab_version": {
+            "type": "string",
+            "title": "ddalab version",
+            "description": "ddalab release installed from PyPI at run time",
+            "default": "2.9.0"
+          }
+        }
+      }
+    }
+  }
+}
