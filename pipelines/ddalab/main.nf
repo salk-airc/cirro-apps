@@ -130,12 +130,12 @@ workflow {
     if (twice) error "Two recordings share the name ${twice.join(', ')}. Names must be unique across the picked files."
 
     // BrainVision (.vhdr with .eeg and .vmrk) and EEGLAB (.set with .fdt) keep their data beside
-    // the header: stage those files from the same folder. Named, not globbed: a glob over S3
-    // matched nothing on Cirro, so the .eeg never reached the task.
+    // the header: stage those files from the same folder. resolveSibling, not "${f.parent}/...":
+    // an S3 path turns into "/bucket/key" in a string, which Nextflow then reads as a local path.
     def sidecars = [vhdr: ['eeg', 'vmrk'], set: ['fdt']]
     def recordings = Channel.fromList(picked).map { f ->
         def ext = f.extension.toLowerCase()
-        def extra = (sidecars[ext] ?: []).collect { file("${f.parent}/${stem(f.name)}.${it}") }.findAll { it.exists() }
+        def extra = (sidecars[ext] ?: []).collect { f.resolveSibling("${stem(f.name)}.${it}") }.findAll { it.exists() }
         tuple(f.name, [f] + extra)
     }
 
