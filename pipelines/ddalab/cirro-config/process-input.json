@@ -1,0 +1,21 @@
+{
+  "recordings": "$.dataset.params.input.recordings[*]",
+  "outdir": "$.dataset.dataPath",
+  "st": "$.dataset.params.variants.st",
+  "ct": "$.dataset.params.variants.ct",
+  "ct_pairs": "$.dataset.params.variants.ct_pairs",
+  "cd": "$.dataset.params.variants.cd",
+  "cd_pairs": "$.dataset.params.variants.cd_pairs",
+  "de": "$.dataset.params.variants.de",
+  "sy": "$.dataset.params.variants.sy",
+  "wl": "$.dataset.params.windows.wl",
+  "ws": "$.dataset.params.windows.ws",
+  "delays": "$.dataset.params.windows.delays",
+  "channels": "$.dataset.params.windows.channels",
+  "reference": "$.dataset.params.windows.reference",
+  "start": "$.dataset.params.windows.start",
+  "end": "$.dataset.params.windows.end",
+  "title": "$.dataset.params.windows.title",
+  "sr": "$.dataset.params.advanced.sr",
+  "ddalab_version": "$.dataset.params.advanced.ddalab_version"
+}
