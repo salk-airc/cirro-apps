@@ -1,0 +1,109 @@
+{
+  "ui": {},
+  "form": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Labeled frames",
+        "properties": {
+          "labels": {
+            "type": "string",
+            "title": "SLEAP labels package (.pkg.slp)",
+            "format": "file-path",
+            "pattern": "\\.slp$",
+            "description": "Your labeled frames as a SLEAP labels package (.pkg.slp). In SLEAP, File \u2192 Export Labels Package (include the images), so the file holds the frames it was labeled on."
+          }
+        },
+        "required": [
+          "labels"
+        ]
+      },
+      "model": {
+        "type": "object",
+        "title": "Model",
+        "properties": {
+          "val_labels": {
+            "type": "string",
+            "title": "Validation labels (optional)",
+            "format": "file-path",
+            "pattern": "\\.slp$",
+            "description": "Optional separate validation labels (.pkg.slp). Leave empty to hold out 10% of the labeled frames."
+          },
+          "model_type": {
+            "type": "string",
+            "enum": [
+              "single_instance",
+              "topdown",
+              "bottomup"
+            ],
+            "title": "Model type",
+            "description": "single_instance: one animal per frame. topdown: several animals, trains a centroid and a centered-instance model (best when animals are well separated). bottomup: several animals in one model (better when animals touch or overlap).",
+            "default": "single_instance",
+            "enumNames": [
+              "Single animal",
+              "Top-down (several animals, mostly apart)",
+              "Bottom-up (several animals that touch)"
+            ]
+          },
+          "model_size": {
+            "type": "string",
+            "enum": [
+              "medium",
+              "large"
+            ],
+            "title": "Receptive field",
+            "description": "Receptive field of sleap-nn's preset. Large sees more context; use it for large animals relative to the frame.",
+            "default": "medium",
+            "enumNames": [
+              "Medium (default)",
+              "Large (big animals or more context)"
+            ]
+          },
+          "max_epochs": {
+            "type": "integer",
+            "title": "Maximum epochs",
+            "description": "Upper limit; training stops early when validation loss stops improving.",
+            "default": 200
+          },
+          "title": {
+            "type": "string",
+            "title": "Viewer title",
+            "description": "Title shown at the top of the viewer",
+            "default": "SLEAP model training"
+          }
+        }
+      },
+      "advanced": {
+        "type": "object",
+        "title": "Advanced",
+        "properties": {
+          "gpu": {
+            "type": "boolean",
+            "title": "Use a GPU",
+            "description": "Train on a GPU (needs the project's GPU limit above 0). Off trains on CPU, which takes hours for real datasets.",
+            "default": true
+          },
+          "batch_size": {
+            "type": "integer",
+            "title": "Frames per batch",
+            "description": "Frames per training batch",
+            "default": 4
+          },
+          "input_scale": {
+            "type": "number",
+            "title": "Input scale (0 = preset)",
+            "description": "Resize frames by this factor before training (e.g. 0.5 for large frames); 0 keeps the preset's scale.",
+            "default": 0
+          },
+          "sleap_nn_version": {
+            "type": "string",
+            "title": "sleap-nn version",
+            "description": "sleap-nn release installed at run time",
+            "default": "0.3.5"
+          }
+        }
+      }
+    }
+  }
+}

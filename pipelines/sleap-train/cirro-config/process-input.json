@@ -1,0 +1,13 @@
+{
+  "labels": "$.dataset.params.input.labels",
+  "outdir": "$.dataset.dataPath",
+  "val_labels": "$.dataset.params.model.val_labels",
+  "model_type": "$.dataset.params.model.model_type",
+  "model_size": "$.dataset.params.model.model_size",
+  "max_epochs": "$.dataset.params.model.max_epochs",
+  "title": "$.dataset.params.model.title",
+  "gpu": "$.dataset.params.advanced.gpu",
+  "batch_size": "$.dataset.params.advanced.batch_size",
+  "input_scale": "$.dataset.params.advanced.input_scale",
+  "sleap_nn_version": "$.dataset.params.advanced.sleap_nn_version"
+}
