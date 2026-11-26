@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SLEAP workspace</title>
+<script>
+  // Open noVNC connected to this server. The websocket path is computed from the current URL,
+  // so it works at the root or behind a proxy path prefix (Cirro's Connect URL).
+  (function () {
+    var base = location.pathname.replace(/[^/]*$/, '');      // directory of this page
+    var path = (base + 'websockify').replace(/^\//, '');      // noVNC wants it without the leading slash
+    var q = 'autoconnect=1&resize=scale&reconnect=1&reconnect_delay=2000&show_dot=1&path=' + encodeURIComponent(path);
+    location.replace(base + 'vnc.html?' + q);
+  })();
+</script>
+</head>
+<body>Opening SLEAP…</body>
+</html>
