@@ -8,6 +8,7 @@ that let Salk researchers explore and analyze their own data.
 | [`pipelines/spatialscape`](pipelines/spatialscape) | 10x Xenium sections → interactive [spatialscape](https://github.com/MicTott/spatialscape) browser | Nextflow pipeline |
 | [`pipelines/colabfold`](pipelines/colabfold) | Protein FASTA → AlphaFold2 structures (ColabFold) with an interactive pLDDT/PAE viewer | Nextflow pipeline (GPU) |
 | [`pipelines/sleap`](pipelines/sleap) | Videos + a lab's trained SLEAP model → tracked poses (sleap-nn) with a video/skeleton viewer | Nextflow pipeline (GPU or CPU) |
+| [`pipelines/sleap-train`](pipelines/sleap-train) | A lab's SLEAP labels package → trained pose model (sleap-nn) with training curves and accuracy per body part | Nextflow pipeline (GPU or CPU) |
 | [`pipelines/cellprofiler`](pipelines/cellprofiler) | Folders of microscope images + a lab's CellProfiler pipeline → merged per-cell measurements with an image/histogram viewer | Nextflow pipeline |
 | [`pipelines/ddalab`](pipelines/ddalab) | EEG/iEEG recordings → Delay Differential Analysis ([DDALAB](https://github.com/sdraeger/DDALAB)) with a channel × time heatmap viewer | Nextflow pipeline |
 

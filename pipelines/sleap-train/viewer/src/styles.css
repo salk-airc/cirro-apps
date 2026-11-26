@@ -1,0 +1,91 @@
+/* SLEAP training viewer. Colors from salk-ui (salk-tokens.css); series colors validated
+   (reference categorical slots 1-2): blue = training, orange = validation. */
+:root { color-scheme: light; --sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; --mono: ui-monospace, SFMono-Regular, Menlo, monospace; --line-strong: color-mix(in srgb, var(--border), var(--foreground) 30%); --s-train: #2a78d6; --s-val: #eb6834; --grid: color-mix(in srgb, var(--foreground) 9%, transparent); }
+:root[data-theme='dark'] { color-scheme: dark; --s-train: #3987e5; --s-val: #d95926; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font: 15px/1.55 var(--sans); }
+main { width: min(1080px, 100% - 32px); margin: 0 auto; padding: 32px 0 64px; }
+h1, h2 { margin: 0; letter-spacing: -0.02em; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.1; }
+h2 { font-size: 1.05rem; }
+a { color: var(--primary); }
+code { font-family: var(--mono); font-size: 0.88em; }
+button { font: inherit; color: inherit; }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.muted { color: var(--muted-foreground); }
+.small { font-size: 0.82rem; }
+.error { color: var(--destructive); }
+
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line-strong); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-weight: 600; font-size: 0.85rem; }
+.icon-button { width: 36px; height: 36px; display: inline-grid; place-items: center; padding: 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); cursor: pointer; flex: none; }
+.icon-button:hover { border-color: var(--primary); }
+.icon-button svg { width: 17px; height: 17px; }
+
+.tiles { display: flex; flex-wrap: wrap; margin: 12px 0 20px; border-bottom: 1px solid var(--border); }
+.tiles div { flex: 1 1 140px; padding: 10px 18px 14px; margin: 6px 0; box-shadow: inset 1px 0 var(--border); }
+.tiles div:first-child { padding-left: 0; box-shadow: none; }
+.tiles dt { color: var(--muted-foreground); font-size: 0.8rem; line-height: 1.3; }
+.tiles dd { margin: 2px 0 0; font-size: 1.3rem; font-weight: 650; line-height: 1.3; }
+
+.use { padding: 18px 20px; border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border)); border-radius: var(--radius); background: color-mix(in srgb, var(--primary) 6%, var(--card)); margin-bottom: 22px; }
+.use h2 { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.use h2 svg { width: 18px; height: 18px; color: var(--primary); }
+.use p { margin: 0 0 8px; }
+.folders { margin: 0 0 8px; padding-left: 20px; }
+
+.part { padding: 20px 22px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); margin-bottom: 18px; }
+.part > header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px 24px; margin-bottom: 12px; }
+.mini { display: flex; flex-wrap: wrap; gap: 6px 24px; margin: 0; }
+.mini dt { color: var(--muted-foreground); font-size: 0.75rem; }
+.mini dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+
+.loss-chart { width: 100%; }
+.loss-chart svg { display: block; }
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; margin-bottom: 6px; font-size: 0.82rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; padding: 0; list-style: none; color: var(--muted-foreground); }
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 3px; border-radius: 2px; }
+.legend i.s-train { background: var(--s-train); }
+.legend i.s-val { background: var(--s-val); }
+.legend i.s-best { width: 0; height: 12px; border-left: 2px dashed var(--muted-foreground); border-radius: 0; }
+.readout { margin: 0; font-variant-numeric: tabular-nums; }
+.grid { stroke: var(--grid); }
+.tick { fill: var(--muted-foreground); font-size: 11px; font-variant-numeric: tabular-nums; }
+.axis-title { font-size: 11px; }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.line.s-train { stroke: var(--s-train); }
+.line.s-val { stroke: var(--s-val); }
+.best { stroke: var(--muted-foreground); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.crosshair { stroke: var(--line-strong); stroke-width: 1; }
+.dot { stroke: var(--card); stroke-width: 2; }
+.dot.s-train { fill: var(--s-train); }
+.dot.s-val { fill: var(--s-val); }
+.end-label { fill: var(--muted-foreground); font-size: 11px; }
+
+.files, .run { margin-top: 10px; font-size: 0.85rem; }
+.files summary, .run summary { cursor: pointer; color: var(--muted-foreground); }
+.files ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 4px; }
+.files a { display: inline-flex; align-items: center; gap: 6px; }
+.files svg { width: 14px; height: 14px; }
+.run dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px 20px; margin: 10px 0 0; }
+.run dt { color: var(--muted-foreground); font-size: 0.75rem; }
+.run dd { margin: 0; }
+
+h3 { margin: 0 0 8px; font-size: 0.9rem; letter-spacing: -0.01em; }
+.eval { margin: 4px 0 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.eval-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 20px; margin: 0 0 16px; }
+.eval-tiles dt { color: var(--muted-foreground); font-size: 0.75rem; }
+.eval-tiles dd { margin: 0; font-size: 1.25rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.eval-tiles span { color: var(--muted-foreground); font-size: 0.72rem; }
+.curve-title { margin-top: 4px; }
+.part-acc { margin: 0; }
+.part-acc figcaption { font-size: 0.82rem; margin-bottom: 8px; }
+.part-acc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; max-height: 340px; overflow: auto; }
+.part-acc li { display: grid; grid-template-columns: minmax(80px, 140px) minmax(0, 1fr) 44px; align-items: center; gap: 10px; font-size: 0.8rem; }
+.pa-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pa-track { height: 12px; }
+.pa-bar { display: block; height: 100%; border-radius: 0 4px 4px 0; background: var(--s-train); }
+.pa-val { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted-foreground); }
+.pt.s-train { fill: var(--s-train); }
+.pt.s-val { fill: var(--s-val); }
